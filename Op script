@@ -1,0 +1,31 @@
+local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
+
+local window = DrRayLibrary:Load("Kaito Hub | Champion Defenders ⚔️ CAMPAIGN!", "Default")
+
+local tab = DrRayLibrary.newTab("Instant Skip wave", "ImageIdHere")
+
+tab.newButton("Button", "Click the button!", function()
+
+    local remote = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Skip")
+
+-- Define the number of times to send the Skip command
+local numSkips = 100
+
+-- Define the delay between each Skip command (in seconds)
+local delay = 0.1  -- Adjust this value as needed
+
+-- Function to send Skip commands
+local function sendSkips()
+    for i = 1, numSkips do
+        local args = {
+            [1] = i
+        }
+        remote:FireServer(unpack(args))
+        wait(delay)  -- Wait for the specified delay before sending the next command
+    end
+end
+
+-- Call the function to start sending Skip commands
+sendSkips()
+
+end)
